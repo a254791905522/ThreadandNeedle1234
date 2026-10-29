@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#7a4a30">
+    <title>Thread &amp; Needle — Close the Tear in One Stroke</title>
+    <meta name="description" content="Thread &amp; Needle is a free cozy puzzle for iPhone and iPad. Pick a stitch, drag the needle through every point in one stroke, and finish under the tension mark before the thread snaps.">
+    <style>
+        :root {
+            --linen: #f4ecdf;
+            --linen-deep: #e6d8c4;
+            --paper: #fffaf3;
+            --ink: #3b2a22;
+            --muted: #6e5648;
+            --wood: #7a4a30;
+            --wood-deep: #4a2c1c;
+            --rose: #c45b52;
+            --gold: #c4923a;
+            --sage: #5e7a5c;
+            --navy: #2e4158;
+            --stitch: rgba(74, 44, 28, 0.35);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: "Avenir Next", "Gill Sans", "Trebuchet MS", sans-serif;
+            color: var(--ink);
+            background-color: var(--linen);
+            min-height: 100vh;
+            background-image:
+                radial-gradient(ellipse 50% 40% at 100% 0%, rgba(196, 91, 82, 0.12), transparent 55%),
+                radial-gradient(ellipse 40% 30% at 0% 100%, rgba(94, 122, 92, 0.12), transparent 50%),
+                linear-gradient(90deg, rgba(122, 74, 48, 0.045) 1px, transparent 1px),
+                linear-gradient(rgba(122, 74, 48, 0.045) 1px, transparent 1px);
+            background-size: auto, auto, 18px 18px, 18px 18px;
+        }
+
+        a { color: inherit; }
+
+        a:focus-visible, .btn:focus-visible {
+            outline: 2px solid var(--rose);
+            outline-offset: 3px;
+        }
+
+        .wrap {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 28px 22px 80px;
+        }
+
+        .mast {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            margin-bottom: 36px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .mark { width: 52px; height: 52px; flex: none; }
+
+        .brand strong {
+            display: block;
+            font-family: "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, serif;
+            font-weight: 600;
+            font-size: 1.35rem;
+            font-style: italic;
+            letter-spacing: 0.01em;
+        }
+
+        .brand small {
+            display: block;
+            margin-top: 1px;
+            font-size: 0.72rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--wood);
+        }
+
+        .mast nav {
+            display: flex;
+            gap: 22px;
+            font-size: 0.95rem;
+        }
+
+        .mast nav a { text-decoration: none; color: var(--muted); }
+        .mast nav a:hover { color: var(--rose); }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .kicker {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--rose);
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-family: "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, serif;
+            font-weight: 600;
+            font-size: clamp(2.6rem, 5.6vw, 4.4rem);
+            line-height: 1.02;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+
+        .lede {
+            color: var(--muted);
+            font-size: 1.08rem;
+            line-height: 1.7;
+            max-width: 38rem;
+            margin-bottom: 18px;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .tags span {
+            font-size: 0.78rem;
+            background: var(--paper);
+            border: 1px dashed var(--stitch);
+            border-radius: 999px;
+            padding: 6px 12px;
+            color: var(--wood-deep);
+        }
+
+        .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-weight: 700;
+            padding: 13px 18px;
+            border-radius: 999px;
+            transition: transform 0.16s ease;
+        }
+
+        .btn:hover { transform: translateY(-2px); }
+
+        .btn-thread {
+            background: var(--rose);
+            color: #fffaf3;
+        }
+
+        .btn-ghost {
+            border: 1.5px dashed var(--wood);
+            color: var(--wood-deep);
+            background: rgba(255, 250, 243, 0.65);
+        }
+
+        .hoop-card {
+            background: var(--paper);
+            border-radius: 28px;
+            padding: 18px 18px 16px;
+            box-shadow: 0 18px 40px rgba(74, 44, 28, 0.12);
+            border: 1px solid rgba(122, 74, 48, 0.12);
+        }
+
+        .hoop-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--wood);
+        }
+
+        .spools { display: flex; gap: 6px; }
+
+        .spools i {
+            width: 14px;
+            height: 18px;
+            border-radius: 4px;
+            display: block;
+            box-shadow: inset 0 0 0 2px rgba(255, 250, 243, 0.45);
+        }
+
+        .spools i:nth-child(1) { background: var(--rose); }
+        .spools i:nth-child(2) { background: var(--gold); }
+        .spools i:nth-child(3) { background: var(--sage); }
+
+        .stage { display: block; width: 100%; height: auto; }
+
+        .stitch-path {
+            stroke-dasharray: 220;
+            stroke-dashoffset: 220;
+            animation: drawstitch 5.2s ease-in-out infinite;
+        }
+
+        .needle {
+            offset-path: path("M118 250 C 150 210, 168 230, 190 188 C 214 142, 236 168, 268 128");
+            animation: needlewalk 5.2s ease-in-out infinite;
+        }
+
+        @keyframes drawstitch {
+            0% { stroke-dashoffset: 220; }
+            62% { stroke-dashoffset: 0; }
+            100% { stroke-dashoffset: 0; }
+        }
+
+        @keyframes needlewalk {
+            0% { offset-distance: 0%; }
+            62% { offset-distance: 100%; }
+            100% { offset-distance: 100%; }
+        }
+
+        .tension { margin-top: 4px; }
+
+        .tension-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 6px;
+        }
+
+        .bar {
+            position: relative;
+            height: 12px;
+            border-radius: 999px;
+            background: var(--linen-deep);
+            overflow: hidden;
+        }
+
+        .bar b {
+            display: block;
+            height: 100%;
+            width: 38%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, var(--sage), var(--gold) 70%, var(--rose));
+            animation: tension 5.2s ease-in-out infinite;
+        }
+
+        .bar em {
+            position: absolute;
+            top: -3px;
+            bottom: -3px;
+            left: 72%;
+            width: 2px;
+            background: var(--navy);
+        }
+
+        @keyframes tension {
+            0% { width: 18%; }
+            30% { width: 46%; }
+            62% { width: 64%; }
+            100% { width: 64%; }
+        }
+
+        .hoop-card figcaption {
+            margin-top: 12px;
+            color: var(--muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .seam {
+            margin-top: 64px;
+        }
+
+        .seam h2, .basket h2, .label-block h2 {
+            font-family: "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, serif;
+            font-weight: 600;
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            line-height: 1.1;
+        }
+
+        .intro {
+            max-width: 40rem;
+            margin-top: 10px;
+            color: var(--muted);
+            line-height: 1.65;
+            font-size: 1.05rem;
+        }
+
+        .timeline {
+            margin-top: 26px;
+            display: grid;
+            gap: 0;
+            border-left: 2px dashed var(--stitch);
+            margin-left: 10px;
+        }
+
+        .timeline article {
+            position: relative;
+            padding: 0 0 22px 28px;
+        }
+
+        .timeline article::before {
+            content: "";
+            position: absolute;
+            left: -7px;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--paper);
+            border: 2px solid var(--rose);
+        }
+
+        .timeline article:nth-child(2)::before { border-color: var(--gold); }
+        .timeline article:nth-child(3)::before { border-color: var(--sage); }
+        .timeline article:nth-child(4)::before { border-color: var(--navy); }
+        .timeline article:nth-child(5)::before { border-color: var(--wood); }
+
+        .timeline h3 {
+            font-family: "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, serif;
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .timeline p { color: var(--muted); line-height: 1.6; max-width: 40rem; }
+
+        .basket { margin-top: 56px; }
+
+        .tiles {
+            margin-top: 22px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .tiles article {
+            background: var(--paper);
+            border-radius: 18px;
+            padding: 20px 18px 18px;
+            border: 1px solid rgba(122, 74, 48, 0.1);
+        }
+
+        .tiles span {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--sage);
+            margin-bottom: 6px;
+        }
+
+        .tiles h3 {
+            font-family: "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, serif;
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .tiles p { color: var(--muted); line-height: 1.55; }
+
+        .pair {
+            margin-top: 56px;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 14px;
+        }
+
+        .note, .care {
+            border-radius: 22px;
+            padding: 24px 22px;
+        }
+
+        .note {
+            background: var(--wood-deep);
+            color: #f6efe6;
+        }
+
+        .note h2, .care h2 {
+            font-family: "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, serif;
+            font-weight: 600;
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        .note p { line-height: 1.65; color: #f0e2d4; }
+        .note p + p { margin-top: 10px; }
+
+        .care {
+            background: var(--paper);
+            border: 1px dashed var(--wood);
+        }
+
+        .care p { color: var(--muted); line-height: 1.6; }
+
+        .care dl {
+            margin-top: 14px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px 14px;
+        }
+
+        .care dt {
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--rose);
+            margin-bottom: 2px;
+        }
+
+        .care dd { font-weight: 650; }
+
+        .closer {
+            margin-top: 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+            padding: 22px;
+            background: var(--paper);
+            border-radius: 22px;
+            border: 1px solid rgba(122, 74, 48, 0.12);
+        }
+
+        .closer p { max-width: 38rem; color: var(--muted); line-height: 1.6; }
+
+        footer {
+            margin-top: 28px;
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+        footer a { color: var(--rose); font-weight: 700; text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+
+        @media (max-width: 860px) {
+            .hero, .tiles, .pair, .care dl { grid-template-columns: 1fr; }
+            .mast { align-items: flex-start; flex-direction: column; }
+            .actions { flex-direction: column; align-items: stretch; }
+            .actions .btn, .closer .btn { width: 100%; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .stitch-path { animation: none; stroke-dashoffset: 0; }
+            .needle { animation: none; offset-distance: 70%; }
+            .bar b { animation: none; width: 58%; }
+            .btn:hover { transform: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <header class="mast">
+            <a class="brand" href="index.html">
+                <svg class="mark" viewBox="0 0 52 52" aria-hidden="true">
+                    <rect width="52" height="52" rx="14" fill="#7a4a30"/>
+                    <ellipse cx="26" cy="27" rx="14" ry="16" fill="none" stroke="#f4ecdf" stroke-width="3"/>
+                    <ellipse cx="26" cy="27" rx="9.5" ry="11" fill="#fffaf3"/>
+                    <path d="M20 32c2.2-7 7.2-7 9.2 0" fill="none" stroke="#c45b52" stroke-width="1.7" stroke-linecap="round"/>
+                    <path d="M31 18l8-9" stroke="#e7eef4" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M31 18c-3 2-7 7-5 13" fill="none" stroke="#c4923a" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                <span>
+                    <strong>Thread &amp; Needle</strong>
+                    <small>Cozy mending puzzle</small>
+                </span>
+            </a>
+            <nav>
+                <a href="#stitch">How to stitch</a>
+                <a href="#patches">The patches</a>
+                <a href="privacy.html">Privacy</a>
+            </nav>
+        </header>
+
+        <main>
+            <section class="hero">
+                <div>
+                    <p class="kicker">Casual puzzle · Free · Designed for iPad</p>
+                    <h1>Close the tear in one steady stroke.</h1>
+                    <p class="lede">
+                        Thread &amp; Needle is a quiet mending puzzle for iPhone and iPad. Every patch has a tear. You get one needle, one thread, and a single stroke to close it. Choose a stitch pattern, then drag through every point without lifting your finger. Smooth curves keep the thread loose. A hard yank around a corner climbs the tension bar, and at 100% the thread snaps.
+                    </p>
+                    <div class="tags">
+                        <span>20 handcrafted patches</span>
+                        <span>One-stroke stitching</span>
+                        <span>Tension bar</span>
+                        <span>Three spools</span>
+                        <span>Age 4+</span>
+                        <span>Contains advertising</span>
+                    </div>
+                    <div class="actions">
+                        <a class="btn btn-thread" href="https://apps.apple.com/us/app/threadandneedle/id6821920031?uo=4" target="_blank" rel="noopener noreferrer">Download on the App Store</a>
+                        <a class="btn btn-ghost" href="privacy.html">Privacy notice</a>
+                    </div>
+                </div>
+                <figure class="hoop-card">
+                    <div class="hoop-top">
+                        <span>Patch 01 · linen</span>
+                        <span class="spools" aria-hidden="true"><i></i><i></i><i></i></span>
+                    </div>
+                    <svg class="stage" viewBox="0 0 380 340" role="img" aria-label="A wooden hoop holds linen with a tear. A needle follows stitch points while a thread draws the mend.">
+                        <ellipse cx="190" cy="168" rx="132" ry="148" fill="#6a412b"/>
+                        <ellipse cx="190" cy="168" rx="112" ry="128" fill="#c9b496"/>
+                        <ellipse cx="190" cy="168" rx="104" ry="120" fill="#f7f1e6"/>
+                        <path d="M150 150 C 168 188, 210 176, 228 214" fill="none" stroke="#e7d3c0" stroke-width="10" stroke-linecap="round"/>
+                        <path class="stitch-path" d="M118 250 C 150 210, 168 230, 190 188 C 214 142, 236 168, 268 128" fill="none" stroke="#c45b52" stroke-width="3.2" stroke-linecap="round"/>
+                        <g fill="#2e4158">
+                            <circle cx="118" cy="250" r="5"/>
+                            <circle cx="168" cy="214" r="5"/>
+                            <circle cx="190" cy="188" r="5"/>
+                            <circle cx="230" cy="156" r="5"/>
+                            <circle cx="268" cy="128" r="5"/>
+                        </g>
+                        <circle cx="214" cy="196" r="7" fill="none" stroke="#c4923a" stroke-width="2"/>
+                        <g class="needle">
+                            <rect x="-2" y="-16" width="4" height="28" rx="1" fill="#d5dde6" transform="rotate(-28)"/>
+                            <circle cx="6" cy="-12" r="2" fill="none" stroke="#d5dde6" stroke-width="1"/>
+                        </g>
+                    </svg>
+                    <div class="tension" aria-hidden="true">
+                        <div class="tension-label">
+                            <span>Tension</span>
+                            <span>Clean stitch mark</span>
+                        </div>
+                        <div class="bar"><b></b><em></em></div>
+                    </div>
+                    <figcaption>A sample hoop. The gold ring is a knot. Finish under the dark mark on the tension bar for a Clean Stitch.</figcaption>
+                </figure>
+            </section>
+
+            <section class="seam" id="stitch">
+                <h2>How a mend is made</h2>
+                <p class="intro">There is no timer and no rush. The whole round is the path of one finger, the knots in the way, and whether the thread is still in one piece at the end.</p>
+                <div class="timeline">
+                    <article>
+                        <h3>Pick the stitch for this tear</h3>
+                        <p>Each patch shows its own tear and a pattern of points. Read that pattern before the stroke starts. The layout changes from patch to patch.</p>
+                    </article>
+                    <article>
+                        <h3>Drag through every point</h3>
+                        <p>Guide the needle in one continuous stroke. Lifting your finger ends the attempt. The thread only counts if it visits the points in a single pass.</p>
+                    </article>
+                    <article>
+                        <h3>Keep the tension bar low</h3>
+                        <p>Curves leave the thread loose. Sharp corners push the bar up. The goal is to finish under the target, not to race the clock.</p>
+                    </article>
+                    <article>
+                        <h3>Steer around the knots</h3>
+                        <p>Knots add tension when the thread crosses them. A clean route goes through the points and leaves those knots alone.</p>
+                    </article>
+                    <article>
+                        <h3>Earn a Clean Stitch</h3>
+                        <p>Land the stroke under the tension target and the tear closes. Hit 100% and the thread snaps. That spool is gone.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="basket" id="patches">
+                <h2>Twenty patches, three spools each</h2>
+                <p class="intro">The App Store listing describes a small set of hand-stitched cloth, portrait controls, and a short ad only when a patch has you stuck.</p>
+                <div class="tiles">
+                    <article>
+                        <span>Cloth</span>
+                        <h3>A tear of its own</h3>
+                        <p>Twenty handcrafted patches, each with a different tear and point layout. Warm linen, wood, and thread art set the table.</p>
+                    </article>
+                    <article>
+                        <span>Spools</span>
+                        <h3>A snap spends thread</h3>
+                        <p>Every patch gives you three spools. A snapped thread is not a hint you can ignore. When the spools run out, that mend is over.</p>
+                    </article>
+                    <article>
+                        <span>Hands</span>
+                        <h3>One finger, portrait</h3>
+                        <p>Controls are built for portrait play. You hold the device and draw the stitch. Nothing else has to be tapped mid-stroke.</p>
+                    </article>
+                    <article>
+                        <span>Skip</span>
+                        <h3>An ad, if you are stuck</h3>
+                        <p>The listing says a short ad can skip a patch you cannot close. The download is free, and the store marks the game as containing advertising.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="pair" id="devices">
+                <article class="note">
+                    <h2>Steady hands, not a stopwatch</h2>
+                    <p>Move smoothly and the thread stays loose. Yank it around a corner and tension climbs until it snaps. The better solve is the quieter line: every point, no knots, still under the mark.</p>
+                    <p>Questions about the game, including privacy, go through the support options on the App Store listing.</p>
+                </article>
+                <article class="care">
+                    <h2>On the App Store</h2>
+                    <p>Listed as ThreadandNeedle. Free, in English, rated 4+, and designed for iPad. The Mac build is marked not verified for macOS.</p>
+                    <dl>
+                        <div>
+                            <dt>Category</dt>
+                            <dd>Casual</dd>
+                        </div>
+                        <div>
+                            <dt>Price</dt>
+                            <dd>Free</dd>
+                        </div>
+                        <div>
+                            <dt>Size</dt>
+                            <dd>110.5 MB</dd>
+                        </div>
+                        <div>
+                            <dt>Language</dt>
+                            <dd>English</dd>
+                        </div>
+                        <div>
+                            <dt>Age</dt>
+                            <dd>4+</dd>
+                        </div>
+                        <div>
+                            <dt>System</dt>
+                            <dd>iOS 15 or later</dd>
+                        </div>
+                    </dl>
+                </article>
+            </section>
+
+            <section class="closer">
+                <p>iPhone and iPod touch need iOS 15 or later. iPad needs iPadOS 15 or later. Mac needs macOS 12 or later and Apple silicon.</p>
+                <a class="btn btn-thread" href="https://apps.apple.com/us/app/threadandneedle/id6821920031?uo=4" target="_blank" rel="noopener noreferrer">Download on the App Store</a>
+            </section>
+        </main>
+
+        <footer>
+            <p>© 2026 Thread &amp; Needle. A cozy mending puzzle for iPhone and iPad.</p>
+            <p><a href="privacy.html">Privacy</a> · <a href="https://apps.apple.com/us/app/threadandneedle/id6821920031?uo=4" target="_blank" rel="noopener noreferrer">App Store</a></p>
+        </footer>
+    </div>
+</body>
+</html>

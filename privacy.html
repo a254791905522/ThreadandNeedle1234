@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#7a4a30">
+    <title>Privacy Notice — Thread &amp; Needle</title>
+    <meta name="description" content="Privacy notice for Thread &amp; Needle. The App Store label lists Usage Data that may be used to track you, and Usage Data that may be linked to you, including advertising data for third-party ads.">
+    <style>
+        :root {
+            --linen: #f4ecdf;
+            --linen-deep: #e6d8c4;
+            --paper: #fffaf3;
+            --ink: #3b2a22;
+            --muted: #6e5648;
+            --wood: #7a4a30;
+            --wood-deep: #4a2c1c;
+            --rose: #c45b52;
+            --gold: #c4923a;
+            --sage: #5e7a5c;
+            --navy: #2e4158;
+            --stitch: rgba(74, 44, 28, 0.35);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: "Avenir Next", "Gill Sans", "Trebuchet MS", sans-serif;
+            color: var(--ink);
+            background-color: var(--linen);
+            min-height: 100vh;
+            background-image:
+                radial-gradient(ellipse 46% 28% at 0% 0%, rgba(196, 146, 58, 0.16), transparent 60%),
+                linear-gradient(90deg, rgba(122, 74, 48, 0.045) 1px, transparent 1px),
+                linear-gradient(rgba(122, 74, 48, 0.045) 1px, transparent 1px);
+            background-size: auto, 18px 18px, 18px 18px;
+        }
+
+        a:focus-visible, .btn:focus-visible {
+            outline: 2px solid var(--rose);
+            outline-offset: 3px;
+        }
+
+        .wrap {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 28px 22px 72px;
+        }
+
+        .mast {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .mark { width: 52px; height: 52px; flex: none; }
+
+        .brand strong {
+            display: block;
+            font-family: "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, serif;
+            font-weight: 600;
+            font-size: 1.35rem;
+            font-style: italic;
+        }
+
+        .brand small {
+            display: block;
+            margin-top: 1px;
+            font-size: 0.72rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--wood);
+        }
+
+        .mast nav { display: flex; gap: 22px; font-size: 0.95rem; }
+        .mast nav a { color: var(--muted); text-decoration: none; }
+        .mast nav a:hover, .mast nav a[aria-current="page"] { color: var(--rose); }
+
+        .leaflet {
+            background: var(--paper);
+            border-radius: 28px;
+            padding: 34px 32px 28px;
+            box-shadow: 0 16px 36px rgba(74, 44, 28, 0.1);
+            border: 1px solid rgba(122, 74, 48, 0.1);
+            position: relative;
+        }
+
+        .leaflet::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 28px;
+            bottom: 28px;
+            width: 6px;
+            border-radius: 0 6px 6px 0;
+            background: repeating-linear-gradient(
+                to bottom,
+                var(--rose) 0 10px,
+                transparent 10px 18px
+            );
+        }
+
+        .eyebrow {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--sage);
+            margin-bottom: 8px;
+        }
+
+        h1 {
+            font-family: "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, serif;
+            font-weight: 600;
+            font-size: clamp(2.1rem, 5vw, 3.1rem);
+            line-height: 1.08;
+            margin-bottom: 12px;
+        }
+
+        .deck {
+            color: var(--muted);
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 18px;
+        }
+
+        .tag-row span {
+            background: var(--linen);
+            border-radius: 999px;
+            padding: 8px 12px;
+            font-size: 0.84rem;
+            line-height: 1.35;
+            color: var(--wood-deep);
+        }
+
+        .dated {
+            margin-top: 14px;
+            font-size: 0.82rem;
+            color: var(--muted);
+        }
+
+        .entry {
+            margin-top: 26px;
+            padding-top: 22px;
+            border-top: 1px dashed var(--stitch);
+        }
+
+        .entry h2 {
+            font-family: "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, serif;
+            font-weight: 600;
+            font-size: 1.55rem;
+            margin-bottom: 8px;
+        }
+
+        .entry p, .entry li {
+            color: var(--muted);
+            line-height: 1.7;
+            font-size: 1.02rem;
+        }
+
+        .entry p + p { margin-top: 10px; }
+        .entry ul { margin: 10px 0 0 1.15rem; }
+        .entry li + li { margin-top: 6px; }
+        .entry a { color: var(--rose); }
+
+        .thread-note {
+            margin-top: 12px;
+            padding: 12px 14px;
+            background: rgba(196, 91, 82, 0.08);
+            border-radius: 14px;
+            color: var(--ink);
+            line-height: 1.6;
+        }
+
+        .facts {
+            margin-top: 12px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .facts div {
+            background: var(--linen);
+            border-radius: 12px;
+            padding: 10px 12px;
+        }
+
+        .facts dt {
+            font-size: 0.66rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--wood);
+            margin-bottom: 3px;
+        }
+
+        .facts dd { font-weight: 700; color: var(--ink); }
+
+        .ribbon {
+            margin-top: 28px;
+            padding: 18px 18px;
+            border-radius: 18px;
+            background: var(--wood-deep);
+            color: #f6efe6;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .ribbon p { max-width: 34rem; line-height: 1.55; color: #f0e2d4; }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-weight: 700;
+            padding: 12px 16px;
+            border-radius: 999px;
+            background: var(--rose);
+            color: #fffaf3;
+            white-space: nowrap;
+        }
+
+        footer {
+            margin-top: 22px;
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+        footer a { color: var(--rose); font-weight: 700; text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+
+        @media (max-width: 700px) {
+            .leaflet { padding: 26px 18px 20px; }
+            .facts { grid-template-columns: 1fr; }
+            .mast { align-items: flex-start; flex-direction: column; }
+            .ribbon .btn { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <header class="mast">
+            <a class="brand" href="index.html">
+                <svg class="mark" viewBox="0 0 52 52" aria-hidden="true">
+                    <rect width="52" height="52" rx="14" fill="#7a4a30"/>
+                    <ellipse cx="26" cy="27" rx="14" ry="16" fill="none" stroke="#f4ecdf" stroke-width="3"/>
+                    <ellipse cx="26" cy="27" rx="9.5" ry="11" fill="#fffaf3"/>
+                    <path d="M20 32c2.2-7 7.2-7 9.2 0" fill="none" stroke="#c45b52" stroke-width="1.7" stroke-linecap="round"/>
+                    <path d="M31 18l8-9" stroke="#e7eef4" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M31 18c-3 2-7 7-5 13" fill="none" stroke="#c4923a" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                <span>
+                    <strong>Thread &amp; Needle</strong>
+                    <small>Cozy mending puzzle</small>
+                </span>
+            </a>
+            <nav>
+                <a href="index.html">The hoop</a>
+                <a href="privacy.html" aria-current="page">Privacy</a>
+            </nav>
+        </header>
+
+        <main class="leaflet">
+            <p class="eyebrow">Privacy notice · mending puzzle</p>
+            <h1>How Thread &amp; Needle handles data</h1>
+            <p class="deck">
+                Thread &amp; Needle is a free puzzle about closing a tear with one needle and one stroke. This notice restates the privacy label on its App Store page for players and for adults who install a game rated 4+. It is a product notice. It is not a statute, and it is not advice from a lawyer. Apple has not verified the label. If the live label and this page ever disagree, follow the label until this notice is replaced.
+            </p>
+            <div class="tag-row">
+                <span>May be used to track you: Usage Data</span>
+                <span>May be linked to you: Usage Data</span>
+                <span>Advertising purpose names Advertising Data</span>
+                <span>Free download · contains ads · age 4+</span>
+            </div>
+            <p class="dated">Notice dated 29 October 2026. It covers the Thread &amp; Needle app, the English introduction beside it, and this page.</p>
+
+            <section class="entry" id="skip">
+                <h2>A short ad can skip a stuck patch</h2>
+                <p>
+                    The download costs nothing. The store listing says the game contains advertising, and that a player who is stuck may watch a short ad to skip ahead. That ad is separate from the stitch itself. The tension bar, the knots, and the three spools on a patch are part of play. The ad is the skip offered when a tear will not close.
+                </p>
+                <p>
+                    Companies allowed to sell that advertising are named in the <a href="app-ads.txt">app-ads.txt</a> file published with these pages. The file is a seller list. It does not inventory every ad that might appear, and the names change when those selling relationships change.
+                </p>
+            </section>
+
+            <section class="entry" id="track">
+                <h2>Usage data that can leave the hoop</h2>
+                <p>
+                    Apple’s privacy label for this game names one category that may follow you to apps and websites run by other companies: Usage Data. On that label, “track” has a narrow meaning. The data may be combined with third-party data for advertising, or it may be shared with a data broker.
+                </p>
+                <p>
+                    The stitch you draw is not posted as a public replay. Nothing on the label adds a health record, an address book, a precise map pin, a camera roll, or a payment card to the tracking list. The category that can travel is Usage Data, and it sits next to the ads described above.
+                </p>
+            </section>
+
+            <section class="entry" id="linked">
+                <h2>What can be tied to an identity</h2>
+                <p>
+                    A second line on the same label says Usage Data may be collected and connected to you. In the third-party advertising block, that usage heading is shown together with Advertising Data — Apple’s name for details about which ads were served and how they were used.
+                </p>
+                <p>
+                    “Linked” is the publisher’s statement to Apple that the data can be joined to an identity. On a phone, that identity is often the advertising identifier. Ad partners rely on it to pick an ad, show it, stop showing it too often, and count whether it ran. Thread &amp; Needle does not offer an account on the store listing, so there is no password, saved card, or profile page described here.
+                </p>
+                <p class="thread-note">
+                    If this page and the live App Store label ever tell two stories, the label wins. This notice will be resewn to match it.
+                </p>
+            </section>
+
+            <section class="entry" id="device">
+                <h2>The mend that stays on the device</h2>
+                <p>
+                    A round is one patch, one stitch pattern, and one stroke. Which patches are finished, how many of the three spools remain, and whether the last stroke was a Clean Stitch are there so play can continue on that install. The App Store label does not file that progress under the categories it says are collected.
+                </p>
+                <p>
+                    Deleting Thread &amp; Needle clears the app’s local storage. If an Apple backup is turned on, Apple may include app data under the backup settings you already chose. The listing does not describe a publisher sign-in or a cloud copy of finished patches.
+                </p>
+            </section>
+
+            <section class="entry" id="pages">
+                <h2>These pages do not ask you to type a name</h2>
+                <p>
+                    The introduction and this notice have no comment box, no mailing list, and no checkout. The store listing does not ask for an email address, phone number, legal name, contacts, camera, microphone, photo library, or precise location before a tear can be mended.
+                </p>
+                <p>
+                    An Apple ID, a charge, Family Sharing, Screen Time, and a device backup belong to Apple. They stay under Apple’s terms and Apple’s privacy policy. Installing the game does not grant a permission the game never requests. If a later version shows a system prompt, the prompt itself names the access.
+                </p>
+            </section>
+
+            <section class="entry" id="switches">
+                <h2>The tracking choice in Settings</h2>
+                <p>
+                    iOS may ask, once, whether Thread &amp; Needle may track activity across other companies’ apps and sites. That prompt is App Tracking Transparency. Decline it, and the cross-app permission stays off. You can reopen the same choice later: Settings, then Privacy &amp; Security, then Tracking. Separate switches for personalized ads can narrow what an ad network is allowed to do on that device even further.
+                </p>
+                <p>
+                    Turning tracking off does not delete the game’s ads. The store page says advertising is part of the free download, including the short ad that skips a patch. The switches change permission. They do not rewrite the listing.
+                </p>
+            </section>
+
+            <section class="entry" id="young">
+                <h2>Players at the 4+ rating</h2>
+                <p>
+                    Someone in the family decides whether a 4+ game is installed. Ask to Buy can pause the download. Screen Time and Family Sharing can do the same, or let it through.
+                </p>
+                <p>
+                    Age does not hide the label. Advertising is still disclosed. Usage Data may still be used to track, and Usage Data may still be linked to a person, with Advertising Data named for third-party ads. Apple also says the practices can differ by age and by which features are used. There is no separate child login inside the hoop. If a child sent personal information to the publisher outside ordinary play, write through App Store support, name Thread &amp; Needle, and include only enough detail to locate the request.
+                </p>
+            </section>
+
+            <section class="entry" id="rights">
+                <h2>Asking for a copy, a correction, or deletion</h2>
+                <p>
+                    Where you live may give you the right to see personal information, fix it, delete it, or take a copy, and to object to or limit some advertising uses. That includes a sale or a share for advertising across different contexts. The path for that request is support on the Thread &amp; Needle App Store page. Say it is a privacy message about this game, and skip anything the request does not need.
+                </p>
+                <p>
+                    Ad companies may keep advertising data on their own side. The publisher cannot always empty those records by deleting a local patch. The Tracking switch is the control that speaks to cross-app permission on the device. These pages publish no personal inbox and no street address.
+                </p>
+                <p>
+                    Usage Data tied to third-party ads, including the Advertising Data type on the label, is retained for those ads, for measuring them, and for legal duties that bind the publisher or an ad partner. Finished patches stored on the device stay until you delete the app or clear its storage, except for an Apple backup you have chosen to keep.
+                </p>
+                <p>
+                    An ad partner may handle that data outside your country. If the law requires a safeguard for the transfer, the safeguard is the one that partner and the platform already apply when they deliver ads. No private overseas office is named on this page.
+                </p>
+            </section>
+
+            <section class="entry" id="listing">
+                <h2>Facts on the store card</h2>
+                <p>
+                    The listing is in English. Thread &amp; Needle is a casual game, free to download, about 110.5 MB, rated 4+, and designed for iPad. It needs iOS 15 or later on iPhone and iPod touch, and iPadOS 15 or later on iPad. Mac needs Apple silicon and macOS 12 or later, and that build is marked not verified for macOS.
+                </p>
+                <dl class="facts">
+                    <div>
+                        <dt>Category</dt>
+                        <dd>Casual</dd>
+                    </div>
+                    <div>
+                        <dt>Price</dt>
+                        <dd>Free</dd>
+                    </div>
+                    <div>
+                        <dt>Size</dt>
+                        <dd>110.5 MB</dd>
+                    </div>
+                    <div>
+                        <dt>Age</dt>
+                        <dd>4+</dd>
+                    </div>
+                </dl>
+                <p>
+                    Download, update, and refund paths run through Apple. Information Apple already holds about an Apple ID is not copied into a separate publisher file merely because the game is installed.
+                </p>
+            </section>
+
+            <section class="entry" id="later">
+                <h2>When this notice is resewn</h2>
+                <p>
+                    The date at the top is the date of this wording. If a later version collects a new category, or changes whether data is used to track, the App Store privacy label should move with that version, and this page will be rewritten so the two match.
+                </p>
+                <p>
+                    Playing after a replacement notice is posted means the new text was available here and, when Apple shows the link, on the privacy policy entry of the store listing.
+                </p>
+            </section>
+
+            <div class="ribbon">
+                <p>The live listing, the privacy label, and product support for Thread &amp; Needle are on the App Store page.</p>
+                <a class="btn" href="https://apps.apple.com/us/app/threadandneedle/id6821920031?uo=4" target="_blank" rel="noopener noreferrer">Download on the App Store</a>
+            </div>
+        </main>
+
+        <footer>
+            <p>© 2026 Thread &amp; Needle. Privacy notice for the mending puzzle.</p>
+            <p><a href="index.html">The hoop</a> · <a href="https://apps.apple.com/us/app/threadandneedle/id6821920031?uo=4" target="_blank" rel="noopener noreferrer">App Store</a></p>
+        </footer>
+    </div>
+</body>
+</html>
